@@ -16,7 +16,7 @@ export default function FormSignIn(){
             <InputForm label={"senha"} type={"password"}/>
             <ButtonSign />
             <p className="text-white text-sm mb-5">
-                Não possui uma conta? <a className="font-bold underline" href="/signup">Cadastre-se</a>
+                Não possui uma conta? <a className="font-bold underline" href="/pages/signup">Cadastre-se</a>
             </p>
         </form>
     )

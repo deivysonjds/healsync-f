@@ -3,8 +3,13 @@ import FormSignUp from "./components/formSignUp";
 
 export default function Home() {
   return (
-    <main>
-      
-    </main>
+    <>
+      <header>
+        
+      </header>
+      <main>
+        
+      </main>
+    </>
   );
 }

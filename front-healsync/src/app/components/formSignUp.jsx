@@ -18,6 +18,9 @@ export default function FormSignUp(){
             <InputForm label={"cnpj"} type={"text"}/>
             <InputForm label={"telefone"} type={"text"}/>
             <ButtonSign textContent={"up"}/>
+            <p className="text-white mb-2 text-sm">
+                ou <a className="underline font-bold" href="/pages/signin">clique aqui</a> para fazer login
+            </p>
         </form>
     )
 }

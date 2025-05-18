@@ -1,0 +1,15 @@
+import FormSignIn from "@/app/components/formSignIn";
+
+export default function Home() {
+  return (
+    <main className="grid grid-cols-[40%_60%] h-screen">
+      <div className="flex flex-col justify-center items-center">
+        <FormSignIn />
+      </div>
+      <div className="flex flex-col justify-center items-center bg-gradient-to-b from-[#000000] to-[#285060]">
+        <img src="/logo.jpg" alt="logo" />
+        <h1 className="text-white font-bold">Sign In</h1>
+      </div>
+    </main>
+  );
+}

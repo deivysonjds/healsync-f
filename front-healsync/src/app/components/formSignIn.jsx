@@ -2,22 +2,22 @@
 import ButtonSign from "./btnSign";
 import InputForm from "./input";
 
-export default function FormSignUp(){
+export default function FormSignIn(){
     function sigUp(e){
         e.preventDefault()
-        alert("Cadastro!")
+        alert("Login!")
     }
     return (
         <form onSubmit={sigUp} className="flex flex-col justify-center items-center rounded-xl bg-gradient-to-b w-[80%] from-[#000000] to-[#2C6379]" action="">
-            <p className="text-white font-bold text-center mb-3 mt-6">
+            <p className="text-white text-2xl font-bold text-center m-5">
                 Informe <br/> seus dados
             </p>
-            <InputForm label={"Nome do hospital"} type={"text"}/>
-            <InputForm label={"Email"} type={"text"}/>
+            <InputForm label={"Email"} type={"text"} placeholder={"username@example.com"}/>
             <InputForm label={"senha"} type={"password"}/>
-            <InputForm label={"cnpj"} type={"text"}/>
-            <InputForm label={"telefone"} type={"text"}/>
-            <ButtonSign textContent={"up"}/>
+            <ButtonSign />
+            <p className="text-white text-sm mb-5">
+                Não possui uma conta? <a className="font-bold underline" href="/signup">Cadastre-se</a>
+            </p>
         </form>
     )
 }

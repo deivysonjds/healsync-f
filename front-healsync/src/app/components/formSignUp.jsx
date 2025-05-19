@@ -85,9 +85,9 @@ export default function FormSignUp(){
 
                 <ButtonSign textContent={"up"}/>
                 <p className="text-white mb-2 text-sm">
-                    ou
+                    ou{" "}
                     <a className="underline font-bold" href="/pages/signin">clique aqui</a>
-                    para fazer login
+                    {" "}para fazer login
                 </p>
             </form> : <div className="flex flex-col justify-center items-center rounded-xl bg-gradient-to-b w-[80%] from-[#000000] to-[#2C6379]">
                 <div>

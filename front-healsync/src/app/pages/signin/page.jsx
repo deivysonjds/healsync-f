@@ -7,7 +7,7 @@ export default function Home() {
         <FormSignIn />
       </div>
       <div className="flex flex-col justify-center items-center bg-gradient-to-b from-[#000000] to-[#285060]">
-        <img src="/logo.jpg" alt="logo" />
+        <img src="/logo.png" alt="logo" className="w-50 mb-5"/>
         <h1 className="text-white font-bold">Sign In</h1>
       </div>
     </main>

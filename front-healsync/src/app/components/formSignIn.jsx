@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "../schemas/signinSchema";
 
 export default function FormSignIn(){
+
     const {
         register,
         handleSubmit,
@@ -25,7 +26,7 @@ export default function FormSignIn(){
             let token = await res.text()
             
             sessionStorage.setItem('token',token)
-            window.location.href = "/"
+            window.location.href = '/'
             return;
         }
         

@@ -18,7 +18,7 @@ export default function UnidadeTabs() {
           {nomeUnidade}
         </UnidadeButton>
       ))}
-      <button className="border border-black text-sm rounded-full px-4 py-1">
+      <button className="border border-black text-sm rounded-full px-4 py-1 hover:scale-105 transform transition-all">
         Adicionar +
       </button>
     </div>

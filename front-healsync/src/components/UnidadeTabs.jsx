@@ -39,14 +39,10 @@ export default function UnidadeTabs() {
           {unidade.nome}
         </UnidadeButton>
       ))}
-<<<<<<< HEAD:front-healsync/src/app/components/UnidadeTabs.jsx
       <Link
         className="border border-black text-sm rounded-full px-4 py-1"
         href="/pages/cadastrar-unidade"
       >
-=======
-      <button className="border border-black text-sm rounded-full px-4 py-1 hover:scale-105 transform transition-all">
->>>>>>> 73dc06ddf508677bbd4c4b6ce429699250d72a8e:front-healsync/src/components/UnidadeTabs.jsx
         Adicionar +
       </Link>
     </div>

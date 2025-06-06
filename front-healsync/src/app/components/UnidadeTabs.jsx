@@ -2,6 +2,7 @@
 import UnidadeButton from "./UnidadeButton";
 import { useEffect, useState } from "react";
 import { useUnidadeStore } from "../store/useUnidadeStore";
+import Link from "next/link";
 
 export default function UnidadeTabs() {
   const { unidadeSelecionada, setUnidadeSelecionada } = useUnidadeStore();
@@ -39,7 +40,7 @@ export default function UnidadeTabs() {
         </UnidadeButton>
       ))}
       <button className="border border-black text-sm rounded-full px-4 py-1">
-        Adicionar +
+        <Link href="/pages/unidade/registrar">Adicionar +</Link>
       </button>
     </div>
   );

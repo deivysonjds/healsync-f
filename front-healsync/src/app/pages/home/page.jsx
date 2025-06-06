@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchUnidades() {
       try {
-        const res = await fetch("/api/unidades", {
+        const res = await fetch("/api/unidade", {
           //substituir pela URL do backend
           headers: {
             Authorization: `Bearer ${token}`,

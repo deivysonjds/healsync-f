@@ -2,9 +2,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const inverseGradient =
-  "bg-gradient-to-l from-black from-0% to-[#285060] to-100%";
-
 export default function NovaUnidade() {
   const route = useRouter();
 
@@ -56,9 +53,30 @@ export default function NovaUnidade() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviando:", form);
-  };
 
+    const { nome, cep, logradouro, numero, complemento, cidade, uf } = form;
+
+    const endereco = `cep: ${cep}, logradouro: ${logradouro}, número: ${numero}, complemento: ${complemento}, cidade: ${cidade}, uf: ${uf}`;
+    const payload = {
+      nome,
+      endereco,
+    };
+
+    try {
+      fetch("/api/unidade", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.error("Erro ao enviar dados:", error);
+    }
+
+    route.push("/pages/home");
+  };
   return (
     <main className="p-4 md:px-16">
       <button

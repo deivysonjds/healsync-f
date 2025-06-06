@@ -1,10 +1,7 @@
-"use client";
-import { useEffect, useState } from "react";
-import Fluxos from "../../components/FluxoTabs";
-import Header from "../../components/Header";
-import UnidadeTabs from "../../components/UnidadeTabs";
-import Wellcome from "../../components/Wellcome";
-import SemUnidade from "@/app/components/NoUnidade";
+import Fluxos from "../../../components/FluxoTabs";
+import Header from "../../../components/Header";
+import UnidadeTabs from "../../../components/UnidadeTabs";
+import Wellcome from "../../../components/Wellcome";
 
 export default function Home() {
   const [unidades, setUnidades] = useState([]);

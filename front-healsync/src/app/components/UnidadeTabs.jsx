@@ -39,9 +39,12 @@ export default function UnidadeTabs() {
           {unidade.nome}
         </UnidadeButton>
       ))}
-      <button className="border border-black text-sm rounded-full px-4 py-1">
-        <Link href="/pages/unidade/registrar">Adicionar +</Link>
-      </button>
+      <Link
+        className="border border-black text-sm rounded-full px-4 py-1"
+        href="/pages/cadastrar-unidade"
+      >
+        Adicionar +
+      </Link>
     </div>
   );
 }

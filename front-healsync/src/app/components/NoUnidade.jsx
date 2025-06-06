@@ -1,4 +1,5 @@
 import { Frown, Building2 } from "lucide-react";
+import Link from "next/link";
 
 export default function SemUnidade() {
   return (
@@ -12,10 +13,12 @@ export default function SemUnidade() {
         nenhuma Unidade cadastrada.
       </p>
 
-      <button className="flex items-center gap-2 bg-gradient-to-r from-black to-[#285060] text-white font-semibold px-6 py-3 rounded-lg">
-        Cadastrar unidade
-        <Building2 size={20} />
-      </button>
+      <Link
+        className="flex items-center gap-2 bg-gradient-to-r from-black to-[#285060] text-white font-semibold px-6 py-3 rounded-lg"
+        href="/pages/cadastrar-unidade"
+      >
+        Cadastrar Unidade <Building2 size={20} />
+      </Link>
     </div>
   );
 }

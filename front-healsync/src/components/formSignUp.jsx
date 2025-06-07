@@ -88,7 +88,7 @@ export default function FormSignUp(){
                     </p>
                 </div>
                 <div>
-                    <a onClick={setSigninIsOk(!signUpIsOk)} href="/pages/signin">
+                    <a onClick={setSigninIsOk(!signUpIsOk)} href="/">
                         <button className="bg-[#1b2c33] text-white pl-4 pr-4 pt-2 pb-2 rounded-md m-7 hover:bg-[#000000] hover:cursor-pointer transition min-w-[120px]">
                             fazer login
                         </button>

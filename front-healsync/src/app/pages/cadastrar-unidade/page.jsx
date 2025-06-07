@@ -1,5 +1,5 @@
-import Header from "@/app/components/Header";
-import NovaUnidade from "@/app/components/NewUnidade";
+import Header from "@/components/Header";
+import NovaUnidade from "@/components/NewUnidade";
 
 export default function Home() {
   return (

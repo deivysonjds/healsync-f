@@ -1,20 +1,15 @@
-import Image from "next/image";
-import FormSignUp from "../components/formSignUp";
-import NavBar from "../components/navbar";
+import FormSignIn from "@/components/formSignIn";
 
 export default function Home() {
   return (
-    <>
-      <header className="bg-[#1B2C33] min-h-16 flex items-center justify-center">
-        <img className="w-[50px] ml-10 mr-5" src="/logo.png" alt="logo" />
-        <NavBar />
-        <div className="w-11 h-10 bg-amber-50 mr-15 rounded-full">
-
-        </div>
-      </header>
-      <main>
-        
-      </main>
-    </>
+    <main className="grid grid-cols-[40%_60%] h-screen">
+      <div className="flex flex-col justify-center items-center">
+        <FormSignIn />
+      </div>
+      <div className="flex flex-col justify-center items-center bg-gradient-to-b from-[#000000] to-[#285060]">
+        <img src="/logo.png" alt="logo" className="w-50 mb-5"/>
+        <h1 className="text-white font-bold">Sign In</h1>
+      </div>
+    </main>
   );
 }

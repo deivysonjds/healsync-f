@@ -3,7 +3,7 @@ import ButtonSign from "./btnSign";
 import InputForm from "./input";
 import { useForm } from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod"
-import { signUpSchema } from "../schemas/signupSchema";
+import { signUpHospitalSchema, signUpAdminSchema} from "../schemas/signupSchema";
 import { useState } from "react";
 
 
@@ -15,10 +15,10 @@ export default function FormSignUp(){
         handleSubmit,
         formState: {errors},
     } = useForm({
-        resolver: zodResolver(signUpSchema)
+        resolver: zodResolver(signUpHospitalSchema)
     })
 
-    const signUp =async (data)=>{
+    const signUpHospital =async (data)=>{
         console.log(JSON.stringify(data, null, 2));
         
         console.log("api: " +process.env.NEXT_PUBLIC_API);
@@ -30,7 +30,7 @@ export default function FormSignUp(){
         })
         
         if (dataResponse.ok) {
-            setSigninIsOk(true)
+            setSigninIsOk(!signUpIsOk)
         }
         
     }
@@ -38,7 +38,7 @@ export default function FormSignUp(){
     return (
         <>
             {
-                !signUpIsOk ? <form onSubmit={handleSubmit(signUp)} className="flex flex-col justify-center items-center rounded-xl bg-gradient-to-b w-[80%] from-[#000000] to-[#2C6379]" action="">
+                !signUpIsOk ? <form onSubmit={handleSubmit(signUpHospital)} className="flex flex-col justify-center items-center rounded-xl bg-gradient-to-b w-[80%] from-[#000000] to-[#2C6379]" action="">
                 <p className="text-white font-bold text-center mb-3 mt-6">
                     Informe seus dados
                 </p>
@@ -57,14 +57,6 @@ export default function FormSignUp(){
                     name={"email"}
                     register={register}
                     error={errors.email}
-                    />
-
-                <InputForm
-                    label={"senha"} 
-                    type={"password"}
-                    name={"password"}
-                    register={register}
-                    error={errors.password}
                     />
 
                 <InputForm
@@ -96,7 +88,7 @@ export default function FormSignUp(){
                     </p>
                 </div>
                 <div>
-                    <a href="/pages/signin">
+                    <a onClick={setSigninIsOk(!signUpIsOk)} href="/pages/signin">
                         <button className="bg-[#1b2c33] text-white pl-4 pr-4 pt-2 pb-2 rounded-md m-7 hover:bg-[#000000] hover:cursor-pointer transition min-w-[120px]">
                             fazer login
                         </button>

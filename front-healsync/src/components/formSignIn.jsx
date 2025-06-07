@@ -4,8 +4,10 @@ import ButtonSign from "./btnSign";
 import InputForm from "./input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "../schemas/signinSchema";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function FormSignIn(){
+    const {login} = useAuthStore()
 
     const {
         register,
@@ -25,8 +27,8 @@ export default function FormSignIn(){
         if (res.ok) {
             let token = await res.text()
             
-            sessionStorage.setItem('token',token)
-            window.location.href = '/'
+            login(token)
+            window.location.href = '/pages/home'
             return;
         }
         

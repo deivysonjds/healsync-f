@@ -1,26 +1,50 @@
 "use client";
 import UnidadeButton from "./UnidadeButton";
+import { useEffect, useState } from "react";
 import { useUnidadeStore } from "../store/useUnidadeStore";
-
-const unidades = ["unidade 1", "unidade 2", "unidade 3"];
+import Link from "next/link";
 
 export default function UnidadeTabs() {
   const { unidadeSelecionada, setUnidadeSelecionada } = useUnidadeStore();
+  const [unidades, setUnidades] = useState([]);
+
+  useEffect(() => {
+    async function fetchUnidades() {
+      try {
+        const res = await fetch("/api/unidades", {
+          //substituir pela URL do backend
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+        setUnidades(data);
+      } catch (err) {
+        console.error("Erro ao buscar unidades:", err);
+      }
+    }
+
+    fetchUnidades();
+  }, []);
 
   return (
     <div className="flex gap-2 mt-6 px-6 font-bold">
-      {unidades.map((nomeUnidade, index) => (
+      {unidades.map((unidade, index) => (
         <UnidadeButton
           key={index}
-          ativo={unidadeSelecionada === nomeUnidade}
-          onClick={() => setUnidadeSelecionada(nomeUnidade)}
+          ativo={unidadeSelecionada === unidade.nome}
+          onClick={() => setUnidadeSelecionada(unidade.nome)}
         >
-          {nomeUnidade}
+          {unidade.nome}
         </UnidadeButton>
       ))}
-      <button className="border border-black text-sm rounded-full px-4 py-1 hover:scale-105 transform transition-all">
+      <Link
+        className="border border-black text-sm rounded-full px-4 py-1"
+        href="/pages/cadastrar-unidade"
+      >
         Adicionar +
-      </button>
+      </Link>
     </div>
   );
 }

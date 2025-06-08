@@ -1,4 +1,6 @@
-export default function NavBar() {
+export default function NavBar({
+  togglePopUpExit
+}) {
   return (
     <>
       <nav className="flex flex-row justify-between items-center w-[100%] ml-3 mr-5 text-white">
@@ -14,10 +16,13 @@ export default function NavBar() {
             </a>
           </div>
         </div>
-        <div>
+        <div className="flex justify-center items-center gap-4 mr-4">
           <a href="/pages/config">
             <img className="w-11" src="/icon-config.png" alt="logo" />
           </a>
+          <div onClick={togglePopUpExit} className="hover:underline transition hover:cursor-pointer">
+            <p>sair</p>
+          </div>
         </div>
       </nav>
     </>

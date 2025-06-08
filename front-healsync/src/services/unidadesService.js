@@ -1,0 +1,17 @@
+import Cookies from "js-cookie";
+const URL_BASE_UNIDADES = `${process.env.NEXT_PUBLIC_API}/unidades`
+
+export async function fetchUnidades(setUnidades) {
+    const token = Cookies.get("token");
+    
+    const res = await fetch(`${URL_BASE_UNIDADES}`, {
+        method: "GET",
+        headers: {
+        Authorization: `Bearer ${token}`
+        },
+    });
+
+    const data = await res.json();
+    
+    setUnidades(data);
+}

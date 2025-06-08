@@ -9,23 +9,24 @@ import Cookies from "js-cookie";
 
 export default function Home() {
   const [unidades, setUnidades] = useState([]);
-
-  useEffect(() => {
-    async function fetchUnidades() {
+  async function fetchUnidades() {
       const token = Cookies.get("token");
-      try {
+      console.log("Token:", token);
+      
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/unidades`, {
+          method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           },
         });
+        console.log(res.status);
+
         const data = await res.json();
+        
         setUnidades(data);
-      } catch (err) {
-        console.error("Erro ao buscar unidades:", err);
-      }
     }
+    
+  useEffect(() => {
 
     fetchUnidades();
   }, []);

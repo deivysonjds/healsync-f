@@ -1,20 +1,20 @@
 "use client";
 import UnidadeButton from "./UnidadeButton";
-import { useUnidadeStore } from "../store/useUnidadeStore";
+import { useUnidadesStore } from "../store/useUnidadeStore";
 import Link from "next/link";
 
 export default function UnidadeTabs({
   unidades
 }) {
-  const { unidadeSelecionada, setUnidadeSelecionada } = useUnidadeStore();
+  const { unidadeSelecionada, setUnidadeSelecionada } = useUnidadesStore();
   
   return (
     <div className="flex gap-2 mt-6 px-6 font-bold">
       {unidades.map((unidade) => (
         <UnidadeButton
           key={unidade.id}
-          ativo={unidadeSelecionada === unidade.nome}
-          onClick={() => setUnidadeSelecionada(unidade.nome)}
+          ativo={unidadeSelecionada.name === unidade.name}
+          onClick={() => setUnidadeSelecionada(unidade)}
         >
           {unidade.name}
         </UnidadeButton>

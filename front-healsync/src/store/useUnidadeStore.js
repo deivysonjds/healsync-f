@@ -1,14 +1,12 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
-export const useUnidadeStore = create(
-  persist(
-    (set) => ({
-      unidadeSelecionada: "unidade 1",
+export const useUnidadesStore = create((set) => ({
+      unidades: [],
+      unidadeSelecionada: null,
       setUnidadeSelecionada: (unidade) => set({ unidadeSelecionada: unidade }),
+      setUnidades: (unidades)=> set({
+        unidades: unidades,
+        unidadeSelecionada: unidades.length > 0 ? unidades[0] : null
+        })
     }),
-    {
-      name: "unidade-store", // chave que será usada no localStorage
-    }
-  )
 );

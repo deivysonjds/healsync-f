@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
-const URL_BASE_UNIDADES = `${process.env.NEXT_PUBLIC_API}/unidades`
+const URL_BASE_FUNCIONARIOS = `${process.env.NEXT_PUBLIC_API}/funcionarios`
 
-export async function fetchUnidades(setUnidades) {
+export async function fetchUserData(setUserData) {
     const token = Cookies.get("token");
     
-    const res = await fetch(URL_BASE_UNIDADES, {
+    const res = await fetch(URL_BASE_FUNCIONARIOS, {
         method: "GET",
         headers: {
         Authorization: `Bearer ${token}`
@@ -13,6 +13,6 @@ export async function fetchUnidades(setUnidades) {
 
     const data = await res.json();
     
-    setUnidades(data);
+    setUserData(data);
 }
 

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { validateToken } from './services/validateTokenService'
+import Cookies from 'js-cookie'
+import { isTokenValid } from './services/isValidToken'
 
 export async function middleware(request) {
   const token = request.cookies.get('token')?.value
@@ -8,9 +9,10 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL('/', request.url))
   }
   
-  let isAcess = await validateToken(token)
+  let isAcess = isTokenValid(token)
   
   if(!isAcess){
+    Cookies.remove('token')
     return NextResponse.redirect(new URL('/', request.url))
   }
 

@@ -7,27 +7,45 @@ import Wellcome from "../../../components/Wellcome";
 import SemUnidade from "@/components/NoUnidade";
 import { useUnidadesStore } from "@/store/useUnidadeStore";
 import {fetchUnidades} from "../../../services/unidadesService"
+import { fetchUserData } from "@/services/funcionarioService";
+import { useDataUserStore } from "@/store/useDataUserStore";
+import Loader from "@/components/loader";
+import { useLoadingStore } from "@/store/useLoadingStore";
 
 export default function Home() {
   const {unidades, setUnidades} = useUnidadesStore()
+  const {userData,setUserData} = useDataUserStore()
+  const {isLoading, setIsLoading} = useLoadingStore()
     
   useEffect(() => {
-    fetchUnidades(setUnidades);
+      const loadData = async () => {
+      setIsLoading(true);
+      await fetchUnidades(setUnidades);
+      await fetchUserData(setUserData);
+      setIsLoading(false);
+    };
+
+    loadData()
   }, []);
 
   return (
     <>
       <Header />
       <main>
-        <Wellcome />
-        {unidades.length === 0 ? (
-          <SemUnidade />
-        ) : (
-          <>
-            <UnidadeTabs unidades={unidades} />
-            <Fluxos />
-          </>
-        )}
+        <Wellcome name={userData && userData.name } />
+        {
+          isLoading ? <Loader /> : 
+            unidades && unidades.length === 0 ? (
+              <>
+                <SemUnidade />
+              </>
+            ) : (
+              <>
+                <UnidadeTabs unidades={unidades} />
+                <Fluxos />
+              </>
+            )
+        }
       </main>
     </>
   );

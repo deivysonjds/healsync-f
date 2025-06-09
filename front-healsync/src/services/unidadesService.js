@@ -13,7 +13,9 @@ export async function fetchUnidades(setUnidades, setfluxos) {
     });
 
     const data = await res.json();
-    await fetchFluxos(setfluxos, data[0].id);
+    if(data.length > 0 ){
+        await fetchFluxos(setfluxos, data[0].id);
+    }
     setUnidades(data);
 }
 

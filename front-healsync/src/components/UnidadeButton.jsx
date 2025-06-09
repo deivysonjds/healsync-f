@@ -5,7 +5,7 @@ export default function UnidadeButton(props) {
   return (
     <button
       onClick={props.onClick}
-      className={`hover:scale-105 transform transition-all ${
+      className={`hover:scale-105 hover:cursor-pointer transform transition-all ${
         props.ativo
           ? `${inverseGradient} text-white`
           : "bg-white text-black border"

@@ -11,18 +11,22 @@ import { fetchUserData } from "@/services/funcionarioService";
 import { useDataUserStore } from "@/store/useDataUserStore";
 import Loader from "@/components/loader";
 import { useLoadingStore } from "@/store/useLoadingStore";
+import { useFluxosStore } from "@/store/useFluxosStore";
+import { fetchFluxos } from "@/services/fluxoService";
 
 export default function Home() {
   const {unidades, setUnidades} = useUnidadesStore()
   const {userData,setUserData} = useDataUserStore()
+  const {fluxos, setfluxos} = useFluxosStore()
   const {isLoading, setIsLoading} = useLoadingStore()
     
   useEffect(() => {
       const loadData = async () => {
       setIsLoading(true);
-      await fetchUnidades(setUnidades);
+      await fetchUnidades(setUnidades, setfluxos);
       await fetchUserData(setUserData);
       setIsLoading(false);
+      
     };
 
     loadData()
@@ -35,14 +39,14 @@ export default function Home() {
         <Wellcome name={userData && userData.name } />
         {
           isLoading ? <Loader /> : 
-            unidades && unidades.length === 0 ? (
+            unidades.length === 0 ? (
               <>
                 <SemUnidade />
               </>
             ) : (
               <>
                 <UnidadeTabs unidades={unidades} />
-                <Fluxos />
+                <Fluxos fluxos={fluxos} />
               </>
             )
         }

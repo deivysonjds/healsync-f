@@ -12,7 +12,6 @@ import { useDataUserStore } from "@/store/useDataUserStore";
 import Loader from "@/components/loader";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useFluxosStore } from "@/store/useFluxosStore";
-import { fetchFluxos } from "@/services/fluxoService";
 
 export default function Home() {
   const {unidades, setUnidades} = useUnidadesStore()
@@ -39,7 +38,7 @@ export default function Home() {
         <Wellcome name={userData && userData.name } />
         {
           isLoading ? <Loader /> : 
-            unidades.length === 0 ? (
+            unidades && unidades.length === 0 ? (
               <>
                 <SemUnidade />
               </>

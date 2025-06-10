@@ -10,7 +10,7 @@ export default function NovaUnidade() {
     nome: "",
     cep: "",
     logradouro: "",
-    numero: "",
+    numero: 0,
     complemento: "",
     cidade: "",
     uf: "",
@@ -141,7 +141,7 @@ export default function NovaUnidade() {
               value={form.numero}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
-              type="text"
+              type="number"
             />
           </div>
 

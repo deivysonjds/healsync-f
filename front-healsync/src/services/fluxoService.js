@@ -20,8 +20,9 @@ export async function createFluxo(fluxo, unidadeId, setFluxos) {
         alert("Erro ao criar fluxo!");
         return;
     }
-
-    fetchFluxos(setFluxos)
+    fetchFluxos(setFluxos, unidadeId);
+    
+    return await res.json();
 }
 
 export async function fetchFluxos(setFluxos, unidadeId) {
@@ -39,3 +40,20 @@ export async function fetchFluxos(setFluxos, unidadeId) {
     setFluxos(data);
 }
 
+export async function deleteFluxo(fluxoId, setFluxos, unidadeId) {
+    const token = Cookies.get("token");
+
+    const res = await fetch(`${URL_BASE_FLUXOS}/${fluxoId}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    });
+
+    if (!res.ok) {
+        alert("Erro ao deletar fluxo!");
+        return;
+    }
+
+    fetchFluxos(setFluxos, unidadeId);
+}

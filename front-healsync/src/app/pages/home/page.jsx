@@ -6,49 +6,49 @@ import UnidadeTabs from "../../../components/UnidadeTabs";
 import Wellcome from "../../../components/Wellcome";
 import SemUnidade from "@/components/NoUnidade";
 import { useUnidadesStore } from "@/store/useUnidadeStore";
-import {fetchUnidades} from "../../../services/unidadesService"
+import { fetchUnidades } from "../../../services/unidadesService";
 import { fetchUserData } from "@/services/funcionarioService";
 import { useDataUserStore } from "@/store/useDataUserStore";
 import Loader from "@/components/loader";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useFluxosStore } from "@/store/useFluxosStore";
+import FuncionariosPreview from "@/components/FuncionariosPreview";
 
 export default function Home() {
-  const {unidades, setUnidades} = useUnidadesStore()
-  const {userData,setUserData} = useDataUserStore()
-  const {fluxos, setfluxos} = useFluxosStore()
-  const {isLoading, setIsLoading} = useLoadingStore()
-    
+  const { unidades, setUnidades } = useUnidadesStore();
+  const { userData, setUserData } = useDataUserStore();
+  const { fluxos, setfluxos } = useFluxosStore();
+  const { isLoading, setIsLoading } = useLoadingStore();
+
   useEffect(() => {
-      const loadData = async () => {
+    const loadData = async () => {
       setIsLoading(true);
       await fetchUnidades(setUnidades, setfluxos);
       await fetchUserData(setUserData);
       setIsLoading(false);
-      
     };
 
-    loadData()
+    loadData();
   }, []);
 
   return (
     <>
       <Header />
       <main>
-        <Wellcome name={userData && userData.name } />
-        {
-          isLoading ? <Loader /> : 
-            unidades && unidades.length === 0 ? (
-              <>
-                <SemUnidade />
-              </>
-            ) : (
-              <>
-                <UnidadeTabs unidades={unidades} />
-                <Fluxos fluxos={fluxos} />
-              </>
-            )
-        }
+        <Wellcome name={userData && userData.name} />
+        {isLoading ? (
+          <Loader />
+        ) : unidades && unidades.length === 0 ? (
+          <>
+            <SemUnidade />
+          </>
+        ) : (
+          <>
+            <UnidadeTabs unidades={unidades} />
+            <Fluxos fluxos={fluxos} />
+            <FuncionariosPreview />
+          </>
+        )}
       </main>
     </>
   );

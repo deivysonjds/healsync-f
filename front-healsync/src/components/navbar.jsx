@@ -26,8 +26,15 @@ export default function NavBar() {
                     </div>
                 </div>
                 <div className="flex justify-center items-center gap-4 mr-4">
-                    <a href="/pages/config">
-                        <img className="w-11" src="/icon-config.png" alt="logo" />
+                    <a
+                        href="/pages/configuracoes-conta"
+                        className="group flex items-center justify-center rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A2327]"
+                    >
+                        <img
+                            className="w-11 p-1 rounded-full transition-all hover:bg-[#25313a] hover:scale-105 active:bg-[#1A2327] active:scale-95 group-focus:bg-[#25313a] group-active:bg-[#1A2327] cursor-pointer"
+                            src="/icon-config.png"
+                            alt="Configurações"
+                        />
                     </a>
                     <div onClick={() => setIsExitPopUoOpen(true)} className="hover:underline transition hover:cursor-pointer">
                         <p>sair</p>

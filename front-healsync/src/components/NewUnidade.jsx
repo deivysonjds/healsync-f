@@ -58,13 +58,13 @@ export default function NovaUnidade() {
     const { nome, cep, logradouro, numero, complemento, cidade, uf } = form;
 
     const endereco = {
-        rua: ${logradouro}, 
+        rua: logradouro, 
         bairro: "substituir",
-        número: ${numero},
-        cidade: ${cidade}, 
-        cep: ${cep}, 
-        complemento: ${complemento}, 
-        uf: ${uf}
+        número: numero,
+        cidade: cidade, 
+        cep: cep, 
+        complemento: complemento, 
+        uf: uf
     };
     const payload = {
       nome,

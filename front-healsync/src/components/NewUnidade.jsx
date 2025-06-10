@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createUnidades } from "@/services/unidadesService";
 
 export default function NovaUnidade() {
   const route = useRouter();
@@ -62,18 +63,7 @@ export default function NovaUnidade() {
       endereco,
     };
 
-    try {
-      fetch("/api/unidade", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
-    }
+    createUnidades(payload);
 
     route.push("/pages/home");
   };

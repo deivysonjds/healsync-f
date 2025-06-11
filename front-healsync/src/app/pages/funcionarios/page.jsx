@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import {  
   fetchUserData,  
   createFuncionario,  
-  updateFuncionario,  
+  updateFuncionario,
+  deleteFuncionario
 } from "@/services/funcionarioService";  
 import Cookies from "js-cookie"; // Para pegar o token  
 import Link from "next/link";  
@@ -74,8 +75,7 @@ export default function FuncionariosPage() {
   // Deletar funcionário com confirmação  
   const handleDelete = async (id) => {  
     if (confirm("Tem certeza que deseja excluir este funcionário?")) {  
-      // Aqui você pode implementar a exclusão no backend se disponível  
-      // await deleteFuncionario(id);  
+      await deleteFuncionario(id)
       await loadFuncionarios();  
     }  
   };  
@@ -115,18 +115,18 @@ export default function FuncionariosPage() {
     const dataToSend = {  
       name: formData.nome,  
       email: formData.email,  
-      age: Number(formData.idade),  
+      age: parseInt(formData.idade),  
       cpf: formData.cpf,  
       phone: formData.contato,  
       rg: formData.rg,  
-      role: formData.role,  
+      role: formData.role == "funcionário" ? "prof" : "med",  
       password: formData.senha,  
     };  
 
     try {  
-      if (editFuncionario) {  
+      if (editFuncionario && editFuncionario.id) {  
         await updateFuncionario(  
-          editFuncionario.id || editFuncionario.cpf,  
+          editFuncionario.id,  
           dataToSend,  
           token  
         );  

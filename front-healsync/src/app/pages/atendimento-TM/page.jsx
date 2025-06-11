@@ -1,6 +1,26 @@
-import React from 'react';
-import { ArrowLeft, Cog } from 'lucide-react';
-import ExpandablePanel from './ExpandablePanel';
+import React, { useState } from 'react';
+import { ArrowLeft, Cog, ChevronDown, ChevronUp } from 'lucide-react';
+
+const ExpandablePanel = ({ title, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-gray-200 py-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex justify-between items-center text-left font-medium text-gray-800"
+      >
+        <span>{title}</span>
+        {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+      </button>
+      {isOpen && (
+        <div className="mt-3">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const MedicalApp = () => {
   return (
@@ -36,7 +56,6 @@ const MedicalApp = () => {
           <div className="px-4">
             <ExpandablePanel title="Dados do paciente">
               <div className="text-sm text-gray-600 space-y-2">
-                {/* Aqui seriam implementados os campos de dados do paciente */}
                 <p className="text-gray-500 italic">
                   /* Campos de dados do paciente serão implementados aqui */
                 </p>
@@ -45,7 +64,6 @@ const MedicalApp = () => {
             
             <ExpandablePanel title="Atendimento">
               <div className="text-sm text-gray-600 space-y-2">
-                {/* Aqui seriam implementados os campos de atendimento */}
                 <p className="text-gray-500 italic">
                   /* Campos de atendimento serão implementados aqui */
                 </p>

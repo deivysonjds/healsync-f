@@ -15,7 +15,7 @@ export default function FluxoPage() {
     const {atendimentos, setAtendimentos} = useAtendimentoStore();
 
     const handleAddAtendimento = () => {
-        setAtendimentos([...atendimentos, { ordem: atendimentos.length +1 , sala: "", typeSala: "" }]);
+        setAtendimentos([...atendimentos, {id: null, ordem: atendimentos.length +1 , sala: "", typeSala: atendimentos.length == 0 ? "atendimento" : "" }]);
     }
     useEffect(()=>{
         if (fluxoselecionada) {

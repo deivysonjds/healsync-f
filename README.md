@@ -28,7 +28,7 @@ Uma aplicação web moderna para **gerenciar o fluxo de atendimentos**, **cadast
 
 ## 📁 Estrutura de Pastas
 
-📦src
+📦src  
 ┣ 📂components → Componentes reutilizáveis  
 ┣ 📂app → Rotas da aplicação (Next.js)  
 ┣ 📂store → Arquivos do Zustand para gerenciamento de estado  

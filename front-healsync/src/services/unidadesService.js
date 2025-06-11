@@ -32,6 +32,7 @@ export async function createUnidades(payload) {
   });
 
   if (!res.ok) {
-    throw new Error("Erro ao criar unidade");
+    alert("Erro ao criar unidade", await res.text());
+    return;
   }
 }

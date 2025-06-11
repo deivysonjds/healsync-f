@@ -1,145 +1,122 @@
-/**
- * Formulário modal para cadastro e edição de funcionários.
- *
- * Props:
- * - formData: objeto com os dados do funcionário (controlado pelo componente pai)
- * - editFuncionario: objeto do funcionário em edição (ou null para novo)
- * - show: booleano para exibir ou ocultar o modal
- * - onChange: função para atualizar formData ao digitar nos campos
- * - onClose: função para fechar o modal
- * - onSubmit: função para tratar o submit do formulário
- *
- * Observações:
- * - Campos CPF e RG ficam desabilitados em modo de edição.
- * - Campo senha só é obrigatório ao criar novo funcionário.
- * - O select de cargo envia "PROF" ou "MED" conforme esperado pelo backend.
- */
-export default function FuncionarioForm({
-  formData,
-  editFuncionario,
-  show,
-  onChange,
-  onClose,
-  onSubmit,
-}) {
-  // Não renderiza o modal se show for falso
-  if (!show) return null;
+import React from 'react';  
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-80">
-      <form
-        className="bg-white p-8 rounded-xl shadow-lg min-w-[340px] max-w-lg w-full flex flex-col gap-4 border"
-        style={{ minWidth: 0 }}
-        onSubmit={onSubmit}
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center text-[#1b2c33]">
-          {editFuncionario ? "Editar Funcionário" : "Novo Funcionário"}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Nome */}
+export default function FuncionarioForm({  
+  formData,  
+  editFuncionario,  
+  show,  
+  onChange,  
+  onClose,  
+  onSubmit,  
+}) {  
+  if (!show) return null; // Não renderiza se não estiver visível  
+
+  const handleFormSubmit = (e) => {  
+    e.preventDefault();  
+    onSubmit(e);  
+  };  
+
+  return (  
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-50">  
+      <form  
+        className="bg-white p-8 rounded-xl shadow-lg min-w-[340px] max-w-lg w-full flex flex-col gap-4 border"  
+        onSubmit={handleFormSubmit}  
+      >  
+        {/* Cabeçalho */}  
+        <h2 className="text-2xl font-bold mb-4 text-center text-[#1b2c33]">  
+          {editFuncionario ? 'Editar Funcionário' : 'Novo Funcionário'}  
+        </h2>  
+
+        {/* Campos do formulário */}  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
+          {/* Nome */}  
+          <div>  
+            <label className="block text-sm font-semibold mb-1 text-gray-700" htmlFor="nome">  
+              Nome <span className="text-red-500">*</span>  
+            </label>  
+            <input  
+              id="nome"  
+              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"  
+              name="nome"  
+              value={formData.nome}  
+              onChange={onChange}  
+              required  
+              placeholder="Nome completo"  
+            />  
+          </div>  
+
+          {/* CPF */}  
+          <div>  
+            <label className="block text-sm font-semibold mb-1 text-gray-700" htmlFor="cpf">  
+              CPF <span className="text-red-500">*</span>  
+            </label>  
+            <input  
+              id="cpf"  
+              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"  
+              name="cpf"  
+              value={formData.cpf}  
+              onChange={onChange}  
+              required  
+              disabled={!!editFuncionario} // desabilitado em edição  
+              placeholder="000.000.000-00"  
+            />  
+          </div>  
+
+          {/* Idade */}  
+          <div>  
+            <label className="block text-sm font-semibold mb-1 text-gray-700" htmlFor="idade">  
+              Idade <span className="text-red-500">*</span>  
+            </label>  
+            <input  
+              id="idade"  
+              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"  
+              name="idade"  
+              type="number"  
+              min={1}  
+              value={formData.idade}  
+              onChange={onChange}  
+              required  
+              placeholder="Ex: 25"  
+            />  
+          </div>  
+
+          {/* Endereço */}  
+          <div>  
+            <label className="block text-sm font-semibold mb-1 text-gray-700" htmlFor="endereco">  
+              Endereço <span className="text-red-500">*</span>  
+            </label>  
+            <input  
+              id="endereco"  
+              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"  
+              name="endereco"  
+              value={formData.endereco}  
+              onChange={onChange}  
+              required  
+              placeholder="Rua, número, bairro"  
+            />  
+          </div>  
+
+          {/* RG */}  
+          <div>  
+            <label className="block text-sm font-semibold mb-1 text-gray-700" htmlFor="rg">  
+              RG <span className="text-red-500">*</span>  
+            </label>  
+            <input  
+              id="rg"  
+              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"  
+              name="rg"  
+              value={formData.rg}  
+              onChange={onChange}  
+              required  
+              disabled={!!editFuncionario} // desabilitado em edição  
+              placeholder="00.000.000-0"  
+            />  
+          </div>  
+
+                    {/* Email */}
           <div>
             <label
-              htmlFor="nome"
               className="block text-sm font-semibold mb-1 text-gray-700"
-            >
-              Nome <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="nome"
-              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
-              name="nome"
-              value={formData.nome}
-              onChange={onChange}
-              required
-              placeholder="Nome completo"
-              autoComplete="off"
-            />
-          </div>
-          {/* CPF */}
-          <div>
-            <label
-              htmlFor="cpf"
-              className="block text-sm font-semibold mb-1 text-gray-700"
-            >
-              CPF <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="cpf"
-              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
-              name="cpf"
-              value={formData.cpf}
-              onChange={onChange}
-              required
-              disabled={!!editFuncionario} // Desabilita em edição
-              placeholder="000.000.000-00"
-              autoComplete="off"
-            />
-          </div>
-          {/* Idade */}
-          <div>
-            <label
-              htmlFor="idade"
-              className="block text-sm font-semibold mb-1 text-gray-700"
-            >
-              Idade <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="idade"
-              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
-              name="idade"
-              type="number"
-              min={1}
-              value={formData.idade}
-              onChange={onChange}
-              required
-              placeholder="Ex: 25"
-              autoComplete="off"
-            />
-          </div>
-          {/* Endereço */}
-          <div>
-            <label
-              htmlFor="endereco"
-              className="block text-sm font-semibold mb-1 text-gray-700"
-            >
-              Endereço <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="endereco"
-              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
-              name="endereco"
-              value={formData.endereco}
-              onChange={onChange}
-              required
-              placeholder="Rua, número, bairro"
-              autoComplete="off"
-            />
-          </div>
-          {/* RG */}
-          <div>
-            <label
-              htmlFor="rg"
-              className="block text-sm font-semibold mb-1 text-gray-700"
-            >
-              RG <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="rg"
-              className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
-              name="rg"
-              value={formData.rg}
-              onChange={onChange}
-              required
-              disabled={!!editFuncionario} // Desabilita em edição
-              placeholder="00.000.000-0"
-              autoComplete="off"
-            />
-          </div>
-          {/* Email */}
-          <div>
-            <label
               htmlFor="email"
-              className="block text-sm font-semibold mb-1 text-gray-700"
             >
               Email <span className="text-red-500">*</span>
             </label>
@@ -152,14 +129,14 @@ export default function FuncionarioForm({
               onChange={onChange}
               required
               placeholder="email@exemplo.com"
-              autoComplete="off"
             />
           </div>
+
           {/* Contato */}
           <div>
             <label
-              htmlFor="contato"
               className="block text-sm font-semibold mb-1 text-gray-700"
+              htmlFor="contato"
             >
               Contato <span className="text-red-500">*</span>
             </label>
@@ -173,14 +150,14 @@ export default function FuncionarioForm({
               onChange={onChange}
               required
               placeholder="(99) 99999-9999"
-              autoComplete="off"
             />
           </div>
+
           {/* Cargo */}
           <div>
             <label
-              htmlFor="role"
               className="block text-sm font-semibold mb-1 text-gray-700"
+              htmlFor="cargo"
             >
               Cargo <span className="text-red-500">*</span>
             </label>
@@ -197,11 +174,12 @@ export default function FuncionarioForm({
               <option value="MED">Médico</option>
             </select>
           </div>
+
           {/* Senha */}
           <div className="md:col-span-2">
             <label
-              htmlFor="senha"
               className="block text-sm font-semibold mb-1 text-gray-700"
+              htmlFor="senha"
             >
               Senha{" "}
               {editFuncionario ? (
@@ -217,7 +195,7 @@ export default function FuncionarioForm({
               className="border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
               name="senha"
               type="password"
-              value={formData.senha}
+              value={formData.senha || ''}
               onChange={onChange}
               required={!editFuncionario}
               placeholder="Senha de acesso"
@@ -225,6 +203,7 @@ export default function FuncionarioForm({
             />
           </div>
         </div>
+
         {/* Botões de ação */}
         <div className="flex gap-2 mt-6 justify-end">
           <button
@@ -245,10 +224,3 @@ export default function FuncionarioForm({
     </div>
   );
 }
-
-/*
-Sugestões de melhoria:
-- Separar cada campo em um componente menor para reutilização e melhor manutenção.
-- Validar campos no front-end antes do submit.
-- Usar bibliotecas como react-hook-form para controle e validação do formulário.
-*/

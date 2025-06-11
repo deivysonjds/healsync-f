@@ -17,6 +17,7 @@ export async function fetchUserData(setUserData) {
         },
     });
     const data = await res.json();
+    console.log('Dados recebidos:', data); // Adicione este log
     setUserData(data);
 }
 

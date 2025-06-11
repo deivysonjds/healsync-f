@@ -32,39 +32,43 @@ export default function FuncionariosTable({ funcionarios, onEdit, onDelete }) {
         </thead>
         <tbody>
           {Array.isArray(funcionarios) && funcionarios.length > 0 ? (
-            funcionarios.map((func, idx) => (
-              <tr key={func.id || func.cpf || idx}>
-                <td className="border px-2 py-2">{func.nome}</td>
-                <td className="border px-2 py-2">{func.cpf}</td>
-                <td className="border px-2 py-2">{func.idade}</td>
-                <td className="border px-2 py-2">{func.endereco}</td>
-                <td className="border px-2 py-2">{func.rg}</td>
-                <td className="border px-2 py-2">{func.email}</td>
-                <td className="border px-2 py-2">{func.contato}</td>
-                <td className="border px-2 py-2">
-                  {/* Exibe o cargo de forma amigável */}
-                  {func.role === "PROF"
-                    ? "Funcionário"
-                    : func.role === "MED"
-                    ? "Médico"
-                    : func.role}
-                </td>
-                <td className="border px-2 py-2 flex gap-2">
-                  <button
-                    className="px-2 py-1 bg-yellow-400 rounded"
-                    onClick={() => onEdit(func)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="px-2 py-1 bg-red-500 text-white rounded"
-                    onClick={() => onDelete(func.id || func.cpf)}
-                  >
-                    Deletar
-                  </button>
-                </td>
-              </tr>
-            ))
+            funcionarios.map((func, idx) => {
+              return (
+                <tr key={func.id || func.cpf || idx}>
+                  <td className="border px-2 py-2">{func.name}</td>
+                  <td className="border px-2 py-2">{func.cpf}</td>
+                  <td className="border px-2 py-2">{func.age}</td>
+                  <td className="border px-2 py-2">
+                    {func.endereco ? func.endereco.rua : ""}
+                  </td>
+                  <td className="border px-2 py-2">{func.rg}</td>
+                  <td className="border px-2 py-2">{func.email}</td>
+                  <td className="border px-2 py-2">{func.telefone}</td>
+                  <td className="border px-2 py-2">
+                    {/* Exibe o cargo de forma amigável */}
+                    {func.role === "PROF"
+                      ? "Funcionário"
+                      : func.role === "MED"
+                      ? "Médico"
+                      : func.role}
+                  </td>
+                  <td className="border px-2 py-2 flex gap-2">
+                    <button
+                      className="px-2 py-1 bg-yellow-400 rounded"
+                      onClick={() => onEdit(func)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="px-2 py-1 bg-red-500 text-white rounded"
+                      onClick={() => onDelete(func.id || func.cpf)}
+                    >
+                      Deletar
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
           ) : (
             <tr>
               <td colSpan={9} className="text-center py-4">

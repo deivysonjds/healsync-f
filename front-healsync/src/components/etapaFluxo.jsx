@@ -3,6 +3,8 @@ import { useState } from "react";
 import { MdKeyboardDoubleArrowDown, MdEdit } from "react-icons/md";
 import { createAtendimento } from "@/services/atendimentoService";
 import { useUnidadesStore } from "@/store/useUnidadeStore";
+import MonitorManager from "./MonitorManager";
+import MonitorPainel from "../app/pages/monitor/page.jsx";
 
 export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }) {
     const {
@@ -13,6 +15,9 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
 
     const [editandoOrdem, setEditandoOrdem] = useState(null);
     const {unidadeSelecionada} = useUnidadesStore();
+    const [showMonitorManager, setShowMonitorManager] = useState(false);
+    const [showMonitorPainel, setShowMonitorPainel] = useState(false);
+    const [monitores, setMonitores] = useState([]);
 
     const handleEditEtapa = (atendimento) => {
         setAtendimentoSelecionada(atendimento);
@@ -57,7 +62,6 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
                 <div key={atendimento.ordem}>
                     <div className="flex flex-col shadow-md p-4 container w-64 rounded-2xl hover:scale-105 transition transform">
                         <h1 className="text-2xl font-bold mb-4 text-center">{atendimento.nome}</h1>
-
                         {editandoOrdem === atendimento.ordem ? (
                             <form onSubmit={handleSaveEtapa}>
                                 <label htmlFor="sala">Sala:</label>
@@ -83,12 +87,17 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
                                 <p>tipo: {atendimento.typeSala}</p>
                             </>
                         )}
-
                         <div className="flex flex-row gap-2 mt-4">
-                            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+                            <button
+                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+                                onClick={() => {
+                                    if (isEditMode) setShowMonitorManager(true);
+                                    else setShowMonitorPainel(true);
+                                }}
+                                type="button"
+                            >
                                 monitores
                             </button>
-
                             {isEditMode && (
                                 <div onClick={() => handleEditEtapa(atendimento)}>
                                     <MdEdit
@@ -99,7 +108,34 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
                             )}
                         </div>
                     </div>
-
+                    {showMonitorManager && isEditMode && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                            <div className="relative">
+                                <button
+                                    className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl font-bold z-10"
+                                    onClick={() => setShowMonitorManager(false)}
+                                    aria-label="Fechar"
+                                >
+                                    ×
+                                </button>
+                                <MonitorManager monitores={monitores} setMonitores={setMonitores} />
+                            </div>
+                        </div>
+                    )}
+                    {showMonitorPainel && !isEditMode && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                            <div className="relative">
+                                <button
+                                    className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl font-bold z-10"
+                                    onClick={() => setShowMonitorPainel(false)}
+                                    aria-label="Fechar"
+                                >
+                                    ×
+                                </button>
+                                <MonitorPainel />
+                            </div>
+                        </div>
+                    )}
                     {atendimentos.length - 1 !== index && (
                         <div className="flex flex-col justify-center items-center mt-5 w-full">
                             <MdKeyboardDoubleArrowDown size={32} />

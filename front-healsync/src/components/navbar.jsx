@@ -26,9 +26,9 @@ export default function NavBar() {
             </a>
           </div>
           <div>
-            <a href="/pages/monitor" className="hover:underline transition">
+            {/* <a href="/pages/monitor" className="hover:underline transition">
               <p>monitor</p>
-            </a>
+            </a> */}
           </div>
           <div>
             <a href="/pages/atendimento-recepcao" className="hover:underline transition">

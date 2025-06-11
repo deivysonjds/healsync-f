@@ -1,8 +1,7 @@
 import { useAtendimentoStore } from "@/store/useAtendimentoStore";
 import { useState } from "react";
 import { MdKeyboardDoubleArrowDown, MdEdit } from "react-icons/md";
-import { createAtendimento } from "@/services/atendimentoService";
-import { useUnidadesStore } from "@/store/useUnidadeStore";
+import { createAtendimento, updateAtendimento } from "@/services/atendimentoService";
 import MonitorManager from "./MonitorManager";
 import MonitorPainel from "../app/pages/monitor/page.jsx";
 
@@ -14,7 +13,6 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
     } = useAtendimentoStore();
 
     const [editandoOrdem, setEditandoOrdem] = useState(null);
-    const {unidadeSelecionada} = useUnidadesStore();
     const [showMonitorManager, setShowMonitorManager] = useState(false);
     const [showMonitorPainel, setShowMonitorPainel] = useState(false);
     const [monitores, setMonitores] = useState([]);
@@ -32,26 +30,22 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
             return;
         }
 
-        const sala = e.target.sala.value.trim();
-        const typeSala = e.target.typeSala.value.trim();
+        const atendimento = {
+            ...atendimentoselecionada,
+            sala: e.target.sala.value.trim(),
+            typeSala: e.target.typeSala.value.trim()
+        };
 
-        if (!sala || !typeSala) {
+        if (!atendimento.sala || !atendimento.typeSala) {
             alert("Preencha todos os campos.");
             return;
         }
 
-        const updatedAtendimentos = atendimentos.map((atendimento) => {
-            if (atendimento.ordem === atendimentoselecionada.ordem) {
-                return {
-                    ...atendimento,
-                    sala,
-                    typeSala
-                };
-            }
-            return atendimento;
-        });
-
-        await createAtendimento(updatedAtendimentos,fluxoSelecionado.id,setAtendimentos)
+        if (atendimento.id) {
+            await updateAtendimento(atendimento,fluxoSelecionado.id,setAtendimentos)
+        } else {
+            await createAtendimento(atendimento,fluxoSelecionado.id,setAtendimentos)
+        }
         setAtendimentoSelecionada(null);
         setEditandoOrdem(null);
     };
@@ -72,7 +66,7 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
                                     className="mb-2 w-full p-2 border rounded"
                                 />
                                 <label htmlFor="typeSala">Tipo:</label>
-                                <select name="typeSala" id="typeSala" defaultValue={atendimento.typeSala} className="mb-2 w-full p-2 border rounded">
+                                <select name="typeSala" id="typeSala" defaultValue={atendimento.ordem == 1 ? "atendimento" : atendimento.typeSala} className="mb-2 w-full p-2 border rounded">
                                     <option value="">Selecione um tipo</option>
                                     <option value="espera">espera</option>
                                     <option value="atendimento">atendimento</option>

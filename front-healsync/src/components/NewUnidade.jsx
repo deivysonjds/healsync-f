@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createUnidades } from "@/services/unidadesService";
 
 export default function NovaUnidade() {
   const route = useRouter();
@@ -9,7 +10,7 @@ export default function NovaUnidade() {
     nome: "",
     cep: "",
     logradouro: "",
-    numero: "",
+    numero: 0,
     complemento: "",
     cidade: "",
     uf: "",
@@ -56,24 +57,21 @@ export default function NovaUnidade() {
 
     const { nome, cep, logradouro, numero, complemento, cidade, uf } = form;
 
-    const endereco = `cep: ${cep}, logradouro: ${logradouro}, número: ${numero}, complemento: ${complemento}, cidade: ${cidade}, uf: ${uf}`;
+    const endereco = {
+        rua: logradouro, 
+        bairro: "substituir",
+        número: numero,
+        cidade: cidade, 
+        cep: cep, 
+        complemento: complemento, 
+        uf: uf
+    };
     const payload = {
       nome,
       endereco,
     };
 
-    try {
-      fetch("/api/unidade", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
-    }
+    createUnidades(payload);
 
     route.push("/pages/home");
   };
@@ -143,7 +141,7 @@ export default function NovaUnidade() {
               value={form.numero}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
-              type="text"
+              type="number"
             />
           </div>
 

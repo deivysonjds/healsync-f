@@ -1,14 +1,15 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import MonitorManager from "@/components/MonitorManager";
 
 export default function MonitoresPage() {
   const [monitores, setMonitores] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/monitores")
-      .then((res) => res.json())
-      .then((data) => setMonitores(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/monitores")
+  //     .then((res) => res.json())
+  //     .then((data) => setMonitores(data));
+  // }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function NovaUnidade() {
   const route = useRouter();
@@ -51,7 +52,7 @@ export default function NovaUnidade() {
     buscarEndereco(form.cep);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { nome, cep, logradouro, numero, complemento, cidade, uf } = form;
@@ -61,9 +62,9 @@ export default function NovaUnidade() {
       nome,
       endereco,
     };
-
-    try {
-      fetch("/api/unidade", {
+    const token = Cookies.get("token");
+    
+    let res = await fetch(`${process.env.NEXT_PUBLIC_API}/unidades`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -71,8 +72,10 @@ export default function NovaUnidade() {
         },
         body: JSON.stringify(payload),
       });
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
+
+    if (!res.ok) {
+      alert("Erro ao criar unidade. Tente novamente." + await res.text());
+      return;
     }
 
     route.push("/pages/home");

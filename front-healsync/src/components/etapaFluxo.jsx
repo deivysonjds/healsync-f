@@ -90,7 +90,7 @@ export default function EtapaFluxo({ atendimentos, isEditMode,fluxoSelecionado }
                                 }}
                                 type="button"
                             >
-                                monitores
+                                monitor
                             </button>
                             {isEditMode && (
                                 <div onClick={() => handleEditEtapa(atendimento)}>

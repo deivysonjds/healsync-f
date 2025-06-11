@@ -63,10 +63,13 @@ yarn dev
 # ou
 npm run dev
 
-
+```
 🔐 Autenticação
-A plataforma pode inclui login com autenticação por JWT (token), protegendo rotas específicas conforme o perfil do usuário. O controle de sessão e autenticação é feito via:
+A plataforma inclui login com autenticação por JWT (token), protegendo rotas específicas conforme o perfil do usuário. O controle de sessão e autenticação é feito via:
 
-Context API
+Context API, Token armazenado de forma segura ( cookies )
 
-Token armazenado de forma segura ( cookies )
+Para teste localmente você deve executar o projeto junto com o backend, acessando o repositório https://github.com/deivysonjds/healsync-b.git.
+Ao executar ambos ao mesmo tempo, você deve fazer o signup ou acessar o perfil já cadastrado com as credenciais;
+ e-mail -> teste@gmail.com
+ senha -> teste123@

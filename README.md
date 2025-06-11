@@ -9,14 +9,10 @@ Uma aplicação web moderna para **gerenciar o fluxo de atendimentos**, **cadast
 
 ## 📌 Funcionalidades Principais
 
-- 📋 Cadastro, edição e exclusão de **pacientes**
+- 📋 Cadastro de **pacientes**
 - 👨‍⚕️ Gestão de **funcionários** (médicos, recepcionistas, etc.)
 - 🗂️ Controle e acompanhamento dos **atendimentos**
-- 📊 Painel com indicadores de desempenho (opcional)
-- 🔍 Busca rápida por CPF, nome ou ID
 - 🔒 Controle de acesso e permissões por tipo de usuário (ex: administrador, atendente)
-- 💬 Registro de histórico e anotações dos atendimentos
-- 🌐 Interface responsiva e otimizada para desktop e dispositivos móveis
 
 ---
 

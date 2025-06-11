@@ -29,11 +29,11 @@ Uma aplicação web moderna para **gerenciar o fluxo de atendimentos**, **cadast
 ## 📁 Estrutura de Pastas
 
 📦src
-┣ 📂components → Componentes reutilizáveis
-┣ 📂app → Rotas da aplicação (Next.js)
-┣ 📂store → Arquivos do Zustand para gerenciamento de estado
-┣ 📂services → Integração com APIs
-┗ 📂schemas → formulários com zod
+┣ 📂components → Componentes reutilizáveis  
+┣ 📂app → Rotas da aplicação (Next.js)  
+┣ 📂store → Arquivos do Zustand para gerenciamento de estado  
+┣ 📂services → Integração com APIs  
+┗ 📂schemas → formulários com zod  
 
 
 
@@ -70,6 +70,6 @@ A plataforma inclui login com autenticação por JWT (token), protegendo rotas e
 Context API, Token armazenado de forma segura ( cookies )
 
 Para teste localmente você deve executar o projeto junto com o backend, acessando o repositório https://github.com/deivysonjds/healsync-b.git.
-Ao executar ambos ao mesmo tempo, você deve fazer o signup ou acessar o perfil já cadastrado com as credenciais;
- e-mail -> teste@gmail.com
- senha -> teste123@
+Ao executar ambos ao mesmo tempo, você deve fazer o signup ou acessar o perfil já cadastrado com as credenciais;  
+ e-mail -> teste@gmail.com  
+ senha -> teste123@  

@@ -1,3 +1,19 @@
+/**
+ * Formulário modal para cadastro e edição de funcionários.
+ *
+ * Props:
+ * - formData: objeto com os dados do funcionário (controlado pelo componente pai)
+ * - editFuncionario: objeto do funcionário em edição (ou null para novo)
+ * - show: booleano para exibir ou ocultar o modal
+ * - onChange: função para atualizar formData ao digitar nos campos
+ * - onClose: função para fechar o modal
+ * - onSubmit: função para tratar o submit do formulário
+ *
+ * Observações:
+ * - Campos CPF e RG ficam desabilitados em modo de edição.
+ * - Campo senha só é obrigatório ao criar novo funcionário.
+ * - O select de cargo envia "PROF" ou "MED" conforme esperado pelo backend.
+ */
 export default function FuncionarioForm({
   formData,
   editFuncionario,
@@ -6,7 +22,9 @@ export default function FuncionarioForm({
   onClose,
   onSubmit,
 }) {
+  // Não renderiza o modal se show for falso
   if (!show) return null;
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-80">
       <form
@@ -18,6 +36,7 @@ export default function FuncionarioForm({
           {editFuncionario ? "Editar Funcionário" : "Novo Funcionário"}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Nome */}
           <div>
             <label
               htmlFor="nome"
@@ -36,6 +55,7 @@ export default function FuncionarioForm({
               autoComplete="off"
             />
           </div>
+          {/* CPF */}
           <div>
             <label
               htmlFor="cpf"
@@ -50,11 +70,12 @@ export default function FuncionarioForm({
               value={formData.cpf}
               onChange={onChange}
               required
-              disabled={!!editFuncionario}
+              disabled={!!editFuncionario} // Desabilita em edição
               placeholder="000.000.000-00"
               autoComplete="off"
             />
           </div>
+          {/* Idade */}
           <div>
             <label
               htmlFor="idade"
@@ -75,6 +96,7 @@ export default function FuncionarioForm({
               autoComplete="off"
             />
           </div>
+          {/* Endereço */}
           <div>
             <label
               htmlFor="endereco"
@@ -93,6 +115,7 @@ export default function FuncionarioForm({
               autoComplete="off"
             />
           </div>
+          {/* RG */}
           <div>
             <label
               htmlFor="rg"
@@ -107,11 +130,12 @@ export default function FuncionarioForm({
               value={formData.rg}
               onChange={onChange}
               required
-              disabled={!!editFuncionario}
+              disabled={!!editFuncionario} // Desabilita em edição
               placeholder="00.000.000-0"
               autoComplete="off"
             />
           </div>
+          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -131,6 +155,7 @@ export default function FuncionarioForm({
               autoComplete="off"
             />
           </div>
+          {/* Contato */}
           <div>
             <label
               htmlFor="contato"
@@ -151,6 +176,7 @@ export default function FuncionarioForm({
               autoComplete="off"
             />
           </div>
+          {/* Cargo */}
           <div>
             <label
               htmlFor="role"
@@ -167,10 +193,11 @@ export default function FuncionarioForm({
               required
             >
               <option value="">Selecione</option>
-              <option value="FUNCIONARIO">Funcionário</option>
-              <option value="MEDICO">Médico</option>
+              <option value="PROF">Funcionário</option>
+              <option value="MED">Médico</option>
             </select>
           </div>
+          {/* Senha */}
           <div className="md:col-span-2">
             <label
               htmlFor="senha"
@@ -198,6 +225,7 @@ export default function FuncionarioForm({
             />
           </div>
         </div>
+        {/* Botões de ação */}
         <div className="flex gap-2 mt-6 justify-end">
           <button
             type="submit"
@@ -217,3 +245,10 @@ export default function FuncionarioForm({
     </div>
   );
 }
+
+/*
+Sugestões de melhoria:
+- Separar cada campo em um componente menor para reutilização e melhor manutenção.
+- Validar campos no front-end antes do submit.
+- Usar bibliotecas como react-hook-form para controle e validação do formulário.
+*/

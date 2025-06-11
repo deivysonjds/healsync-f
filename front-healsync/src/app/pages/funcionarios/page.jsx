@@ -97,17 +97,31 @@ export default function FuncionariosPage() {
     }));
   };
 
-const handleFormSubmit = async (e) => {
-  e.preventDefault();
-  const dataToSend = { ...formData, idade: Number(formData.idade) };
-  if (editFuncionario) {
-    await updateFuncionario(editFuncionario.id || editFuncionario.cpf, dataToSend);
-  } else {
-    await createFuncionario(dataToSend);
-  }
-  handleFormClose();
-  await loadFuncionarios();
-};
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    // Exemplo de conversão antes de enviar
+    const dataToSend = {
+      name: formData.nome,
+      email: formData.email,
+      age: Number(formData.idade),
+      cpf: formData.cpf,
+      phone: formData.contato,
+      rg: formData.rg,
+      role: formData.role,
+      password: formData.senha,
+      // Remova hospitalId daqui!
+    };
+    if (editFuncionario) {
+      await updateFuncionario(
+        editFuncionario.id || editFuncionario.cpf,
+        dataToSend
+      );
+    } else {
+      await createFuncionario(dataToSend);
+    }
+    handleFormClose();
+    await loadFuncionarios();
+  };
 
   return (
     <>

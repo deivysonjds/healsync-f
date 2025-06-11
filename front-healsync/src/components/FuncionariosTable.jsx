@@ -1,3 +1,18 @@
+/**
+ * Tabela de funcionários.
+ *
+ * Props:
+ * - funcionarios: array de objetos funcionário para exibir na tabela
+ * - onEdit: função chamada ao clicar em "Editar" (recebe o funcionário)
+ * - onDelete: função chamada ao clicar em "Deletar" (recebe o id ou cpf)
+ *
+ * Observações:
+ * - Exibe mensagem caso não haja funcionários.
+ * - Os valores de cargo são convertidos para exibição amigável.
+ * - Ações de editar e deletar são exibidas em cada linha.
+ *
+ * Sugestão: Para tabelas maiores, considere paginação ou busca.
+ */
 export default function FuncionariosTable({ funcionarios, onEdit, onDelete }) {
   return (
     <div className="overflow-x-auto">
@@ -27,9 +42,10 @@ export default function FuncionariosTable({ funcionarios, onEdit, onDelete }) {
                 <td className="border px-2 py-2">{func.email}</td>
                 <td className="border px-2 py-2">{func.contato}</td>
                 <td className="border px-2 py-2">
-                  {func.role === "FUNCIONARIO"
+                  {/* Exibe o cargo de forma amigável */}
+                  {func.role === "PROF"
                     ? "Funcionário"
-                    : func.role === "MEDICO"
+                    : func.role === "MED"
                     ? "Médico"
                     : func.role}
                 </td>
@@ -61,3 +77,10 @@ export default function FuncionariosTable({ funcionarios, onEdit, onDelete }) {
     </div>
   );
 }
+
+/*
+Sugestões de melhoria:
+- Extrair linha da tabela para um componente separado se houver muitas ações ou colunas.
+- Adicionar loading ou skeleton enquanto carrega os dados.
+- Adicionar confirmação ao deletar.
+*/

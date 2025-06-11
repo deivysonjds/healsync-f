@@ -6,13 +6,14 @@ import UnidadeTabs from "../../../components/UnidadeTabs";
 import Wellcome from "../../../components/Wellcome";
 import SemUnidade from "@/components/NoUnidade";
 import { useUnidadesStore } from "@/store/useUnidadeStore";
-import {fetchUnidades} from "../../../services/unidadesService"
+import { fetchUnidades } from "../../../services/unidadesService";
 import { fetchUserData } from "@/services/funcionarioService";
 import { useDataUserStore } from "@/store/useDataUserStore";
 import Loader from "@/components/loader";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useFluxosStore } from "@/store/useFluxosStore";
 import { useAuthStore } from "@/store/useAuthStore";
+import FuncionariosPreview from "@/components/FuncionariosPreview";
 
 export default function Home() {
   const {unidades, setUnidades} = useUnidadesStore()
@@ -22,7 +23,7 @@ export default function Home() {
   const {token} = useAuthStore();
 
   useEffect(() => {
-      const loadData = async () => {
+    const loadData = async () => {
       setIsLoading(true);
       
       if (token) {
@@ -42,20 +43,20 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Wellcome name={userData && userData.name } />
-        {
-          isLoading ? <Loader /> : 
-            unidades && unidades.length === 0 ? (
-              <>
-                <SemUnidade />
-              </>
-            ) : (
-              <>
-                <UnidadeTabs unidades={unidades} />
-                <Fluxos fluxos={fluxos} />
-              </>
-            )
-        }
+        <Wellcome name={userData && userData.name} />
+        {isLoading ? (
+          <Loader />
+        ) : unidades && unidades.length === 0 ? (
+          <>
+            <SemUnidade />
+          </>
+        ) : (
+          <>
+            <UnidadeTabs unidades={unidades} />
+            <Fluxos fluxos={fluxos} />
+            <FuncionariosPreview />
+          </>
+        )}
       </main>
     </>
   );

@@ -32,7 +32,19 @@ export async function fetchAtendimentos(setAtendimentos, fluxoId) {
         },
     });
 
-    const data = await res.json();
+    let data = null;
+    // Verifica se a resposta tem corpo antes de tentar fazer o parsing
+    const text = await res.text();
+    if (text) {
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error("Erro ao fazer parse do JSON:", e);
+            data = null;
+        }
+    } else {
+        data = [];
+    }
     console.log(data);
     setAtendimentos(data);
 }

@@ -12,26 +12,25 @@ import { useDataUserStore } from "@/store/useDataUserStore";
 import Loader from "@/components/loader";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useFluxosStore } from "@/store/useFluxosStore";
-import { useAuthStore } from "@/store/useAuthStore"; // Import useAuthStore
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Home() {
   const {unidades, setUnidades} = useUnidadesStore()
   const {userData,setUserData} = useDataUserStore()
   const {fluxos, setfluxos} = useFluxosStore()
   const {isLoading, setIsLoading} = useLoadingStore()
-  const token = useAuthStore(state => state.token); // Changed to reactive selector
+  const {token} = useAuthStore();
 
   useEffect(() => {
       const loadData = async () => {
       setIsLoading(true);
-      // Ensure token is available before fetching data that depends on it
+      
       if (token) {
-        await fetchUnidades(setUnidades, setfluxos); // Assuming fetchUnidades might also need auth or can run without it
+        await fetchUnidades(setUnidades, setfluxos); 
         await fetchUserData(setUserData);
       } else {
         console.warn("Token ainda não disponível, adiando o carregamento dos dados do usuário.");
-        // Optionally, you could set an error state or retry logic here
-        // For now, we'll just log a warning. The user might need to log in again.
+        
       }
       setIsLoading(false);
     };

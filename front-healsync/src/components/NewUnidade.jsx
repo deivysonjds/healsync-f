@@ -7,9 +7,9 @@ export default function NovaUnidade() {
   const route = useRouter();
 
   const [form, setForm] = useState({
-    nome: "",
+    name: "",
     cep: "",
-    logradouro: "",
+    rua: "",
     numero: 0,
     complemento: "",
     cidade: "",
@@ -38,7 +38,7 @@ export default function NovaUnidade() {
       setErroCep("");
       setForm((prev) => ({
         ...prev,
-        logradouro: data.logradouro || "",
+        rua: data.logradouro || "",
         complemento: data.complemento || "",
         cidade: data.localidade || "",
         uf: data.uf || "",
@@ -52,26 +52,28 @@ export default function NovaUnidade() {
     buscarEndereco(form.cep);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { nome, cep, logradouro, numero, complemento, cidade, uf } = form;
+    const { name, cep, rua, numero, complemento, cidade, uf } = form;
 
     const endereco = {
-        rua: logradouro, 
+        rua: rua, 
         bairro: "substituir",
-        número: numero,
+        numero: numero,
         cidade: cidade, 
         cep: cep, 
         complemento: complemento, 
         uf: uf
     };
     const payload = {
-      nome,
+      name,
       endereco,
-    };
+    }; 
 
-    createUnidades(payload);
+    console.log(payload);
+    
+    await createUnidades(payload);
 
     route.push("/pages/home");
   };
@@ -97,7 +99,7 @@ export default function NovaUnidade() {
             Nome da unidade
           </label>
           <input
-            name="nome"
+            name="name"
             placeholder="Nome da unidade"
             value={form.nome}
             onChange={handleChange}
@@ -122,11 +124,11 @@ export default function NovaUnidade() {
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold mb-1">Logradouro</label>
+            <label className="block text-sm font-bold mb-1">rua</label>
             <input
-              name="logradouro"
-              placeholder="Logradouro"
-              value={form.logradouro}
+              name="rua"
+              placeholder="rua"
+              value={form.rua}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
               type="text"
